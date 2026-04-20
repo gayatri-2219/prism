@@ -81,7 +81,8 @@ export default function PrismApp() {
       return;
     }
 
-    const from = AccAddress.toHex(initiaAddress).toLowerCase();
+    const hexAddress = AccAddress.toHex(initiaAddress);
+    const from = (hexAddress.startsWith("0x") ? hexAddress : `0x${hexAddress}`).toLowerCase();
     const data = encodeFunctionData({
       abi: ABI,
       functionName: "myPosition",
@@ -258,4 +259,3 @@ export default function PrismApp() {
     </section>
   );
 }
-
