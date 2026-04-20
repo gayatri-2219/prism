@@ -1,0 +1,27 @@
+{
+  "name": "prism-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@initia/initia.js": "^1.0.0",
+    "@initia/interwovenkit-react": "2.4.6",
+    "@tanstack/react-query": "^5.0.0",
+    "buffer": "^6.0.3",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "util": "^0.12.5",
+    "viem": "^2.21.16",
+    "wagmi": "^2.12.20"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.10",
+    "vite-plugin-node-polyfills": "^0.23.0"
+  }
+}

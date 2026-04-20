@@ -1,0 +1,12 @@
+.DS_Store
+node_modules
+dist
+out
+prism/cache
+coverage
+.env
+.env.local
+.env.*.local
+.turbo
+.vite
+*.log

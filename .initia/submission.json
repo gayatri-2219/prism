@@ -1,0 +1,12 @@
+{
+  "project_name": "Prism",
+  "repo_url": "https://github.com/gayatri-2219/prism",
+  "commit_sha": "0000000000000000000000000000000000000000",
+  "rollup_chain_id": "prism-1",
+  "deployed_address": "0x24827e983e9921790721BDc294a50803928C9685",
+  "vm": "evm",
+  "native_feature": "interwoven-bridge",
+  "core_logic_path": "prism/src/PrismTreasury.sol",
+  "native_feature_frontend_path": "prism-frontend/src/PrismApp.jsx",
+  "demo_video_url": "https://youtu.be/REPLACE_WITH_DEMO_VIDEO"
+}
