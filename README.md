@@ -1,68 +1,129 @@
-# Prism
+# PRISM
 
-## Initia Hackathon Submission
+PRISM is an Initia-native DeFi assistant that helps users discover opportunities, execute on-chain actions, and track airdrop progress in one workflow.
 
-- **Project Name**: Prism
+## Live Demo
 
-### Project Overview
+- Frontend: https://prism-frontend-ten.vercel.app
 
-Prism is an AI-assisted DeFi coordination app for Initia that helps users fund
-their appchain wallet, deposit into strategy-linked treasury positions, and
-bridge assets into the local rollup from the wider Interwoven ecosystem. The AI
-portion should live offchain, while the appchain is used for balances,
-preferences, transaction flows, and user-owned state.
+## Key Features
 
-### Implementation Detail
+- Wallet connection via `@initia/interwovenkit-react`
+- Discover page with live airdrop campaigns and step tracking
+- Dashboard with wallet balance, contract position, risk score, and transactions
+- Backend APIs for opportunities, portfolio, positions, and airdrops
+- AI guidance mode with provider support and local fallback logic
+- MiniEVM contract interaction flows (deposit/withdraw/risk updates)
 
-- **The Custom Implementation**: The starter contract tracks each user's
-  treasury balance and a risk score that can be updated over time, which makes
-  the onchain layer opinionated toward portfolio preference rather than being a
-  generic vault clone.
-- **The Native Feature**: The frontend is scaffolded around
-  `interwoven-bridge` so users can move assets into the appchain without
-  leaving the core product flow.
+## Tech Stack
 
-### How to Run Locally
+- Frontend: Vite, React, TypeScript, TanStack Query
+- Backend: Node.js, Express, TypeScript, Prisma
+- Smart Contracts: Solidity + Foundry
+- Chain: Initia testnet (InterwovenKit + Initia RPC/REST/Indexer)
+- Deploy: Vercel
 
-1. Install the Initia tools and launch your local appchain by following the
-   `Set Up Your Appchain` flow from the official docs.
-2. Build and deploy the Solidity contract from [prism/src/PrismTreasury.sol](/Users/gayatrisondekar/Desktop/%20init/prism/src/PrismTreasury.sol),
-   then copy the deployed address and chain values into
-   [prism-frontend/.env.example](/Users/gayatrisondekar/Desktop/%20init/prism-frontend/.env.example)
-   to create a real `.env`.
-3. Install the frontend dependencies in `prism-frontend` with `npm install`.
-4. Run `npm run dev` inside `prism-frontend` and connect your wallet to the
-   local appchain.
-
-## Workspace Status
-
-This repository was reset to a clean Initia-oriented starter because the
-previous project was a standalone Next.js prototype and did not match the
-hackathon structure or required submission files.
-
-Current structure:
+## Monorepo Structure
 
 ```text
 .
-├── .initia/
-│   └── submission.json
-├── prism/
-│   ├── foundry.toml
-│   ├── src/
-│   └── test/
-└── prism-frontend/
-    ├── .env.example
-    ├── index.html
-    ├── package.json
-    ├── src/
-    └── vite.config.js
+├── prism-frontend/   # React frontend
+├── backend/          # Express + Prisma APIs
+├── prism/            # Solidity contracts + Foundry tests
+└── docs/             # Product and architecture docs
 ```
 
-## Next Steps
+## API Overview
 
-1. Install the `initia-appchain-dev` skill from the official docs.
-2. Run `weave init` and complete the local appchain setup.
-3. Deploy the EVM contract in `prism/`.
-4. Fill in `.initia/submission.json` with the real repo URL, commit SHA,
-   rollup chain ID, deployed address, and demo video URL.
+- `GET /api/opportunities`
+- `GET /api/portfolio/:address`
+- `GET /api/positions/:address`
+- `GET /api/airdrops`
+- `GET /api/airdrops/:address`
+- `POST /api/airdrops/step`
+- `GET /api/insights/:address`
 
+## Getting Started
+
+### 1) Backend
+
+```bash
+cd backend
+npm install
+cp .env.example .env
+npm run dev
+```
+
+### 2) Frontend
+
+```bash
+cd prism-frontend
+npm install
+cp .env.example .env
+npm run dev
+```
+
+Frontend runs on `http://localhost:5173`.
+
+## Environment Variables
+
+### Backend (`backend/.env`)
+
+Required:
+
+- `DATABASE_URL`
+- `INITIA_REST_URL`
+- `INITIA_RPC_URL`
+- `INITIA_JSON_RPC_URL`
+- `IAE_CONTRACT_ADDRESS`
+
+Optional:
+
+- `ANTHROPIC_API_KEY`
+
+### Frontend (`prism-frontend/.env`)
+
+Required:
+
+- `VITE_APPCHAIN_ID`
+- `VITE_JSON_RPC_URL`
+- `VITE_REST_URL`
+- `VITE_RPC_URL`
+- `VITE_INDEXER_URL`
+- `VITE_IAE_CONTRACT_ADDRESS`
+- `VITE_NATIVE_DENOM` (default `uinit`)
+- `VITE_NATIVE_SYMBOL` (default `INIT`)
+- `VITE_NATIVE_DECIMALS` (default `6`)
+
+## Deployment
+
+Deploy frontend:
+
+```bash
+cd prism-frontend
+npx vercel --prod
+```
+
+Deploy backend:
+
+```bash
+cd backend
+npx vercel --prod
+```
+
+## Current Status
+
+- Live, deployable full-stack demo
+- Initia wallet connection + bridge entry points
+- Persistent campaign progress via backend API
+- Contract interaction flows wired through UI
+
+## Documentation
+
+- `docs/PROJECT_GUIDE.md`
+- `docs/WORKFLOW_GUIDE.md`
+- `docs/SYSTEM_ARCHITECTURE.md`
+
+## License
+
+Add a `LICENSE` file before public release (recommended: MIT).

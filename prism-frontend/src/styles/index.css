@@ -1,0 +1,45 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+@keyframes prismFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes prismSoftPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.18);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+  }
+}
+
+.page-enter {
+  animation: prismFadeUp 0.55s ease-out both;
+}
+
+.reveal-1 { animation: prismFadeUp 0.5s ease-out 0.05s both; }
+.reveal-2 { animation: prismFadeUp 0.5s ease-out 0.12s both; }
+.reveal-3 { animation: prismFadeUp 0.5s ease-out 0.2s both; }
+.reveal-4 { animation: prismFadeUp 0.5s ease-out 0.28s both; }
+
+.hover-lift {
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(30, 39, 73, 0.14);
+}
+
+.status-pulse {
+  animation: prismSoftPulse 1.8s ease-in-out infinite;
+}

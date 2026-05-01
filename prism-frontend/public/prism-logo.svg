@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Outer hexagon navy -->
+  <polygon points="100,8 178,52 178,148 100,192 22,148 22,52" fill="#1a237e" stroke="#283593" stroke-width="2"/>
+  <!-- Inner hexagon teal -->
+  <polygon points="100,30 162,66 162,134 100,170 38,134 38,66" fill="#006064" stroke="#00838f" stroke-width="1.5" opacity="0.9"/>
+  <!-- Diamond gem center -->
+  <polygon points="100,50 140,100 100,150 60,100" fill="#00bcd4" opacity="0.85"/>
+  <polygon points="100,50 140,100 100,100" fill="#0097a7" opacity="0.9"/>
+  <polygon points="100,50 60,100 100,100" fill="#26c6da" opacity="0.9"/>
+  <polygon points="100,150 140,100 100,100" fill="#006064" opacity="0.95"/>
+  <polygon points="100,150 60,100 100,100" fill="#004d40" opacity="0.95"/>
+  <!-- Network constellation dots -->
+  <circle cx="100" cy="75" r="3" fill="white" opacity="0.9"/>
+  <circle cx="125" cy="100" r="2.5" fill="white" opacity="0.8"/>
+  <circle cx="100" cy="125" r="3" fill="white" opacity="0.9"/>
+  <circle cx="75" cy="100" r="2.5" fill="white" opacity="0.8"/>
+  <circle cx="100" cy="100" r="3.5" fill="white" opacity="1"/>
+  <!-- Network lines -->
+  <line x1="100" y1="75" x2="125" y2="100" stroke="white" stroke-width="0.8" opacity="0.6"/>
+  <line x1="125" y1="100" x2="100" y2="125" stroke="white" stroke-width="0.8" opacity="0.6"/>
+  <line x1="100" y1="125" x2="75" y2="100" stroke="white" stroke-width="0.8" opacity="0.6"/>
+  <line x1="75" y1="100" x2="100" y2="75" stroke="white" stroke-width="0.8" opacity="0.6"/>
+  <line x1="100" y1="75" x2="100" y2="100" stroke="white" stroke-width="0.8" opacity="0.5"/>
+  <line x1="125" y1="100" x2="100" y2="100" stroke="white" stroke-width="0.8" opacity="0.5"/>
+  <line x1="100" y1="125" x2="100" y2="100" stroke="white" stroke-width="0.8" opacity="0.5"/>
+  <line x1="75" y1="100" x2="100" y2="100" stroke="white" stroke-width="0.8" opacity="0.5"/>
+  <!-- Corner accent dots on outer hex -->
+  <circle cx="100" cy="14" r="3" fill="#26c6da" opacity="0.7"/>
+  <circle cx="172" cy="56" r="2.5" fill="#26c6da" opacity="0.6"/>
+  <circle cx="172" cy="144" r="2.5" fill="#26c6da" opacity="0.6"/>
+  <circle cx="100" cy="186" r="3" fill="#26c6da" opacity="0.7"/>
+  <circle cx="28" cy="144" r="2.5" fill="#26c6da" opacity="0.6"/>
+  <circle cx="28" cy="56" r="2.5" fill="#26c6da" opacity="0.6"/>
+</svg>

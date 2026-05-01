@@ -1,0 +1,134 @@
+// Prisma Schema for PRISM DeFi Backend
+// Supports: portfolio, staking, airdrops, transactions, opportunities, leaderboard
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ─── Users ──────────────────────────────────────────────────────────────────
+
+model User {
+  id        String   @id @default(cuid())
+  address   String   @unique
+  username  String?  // .init username
+  createdAt DateTime @default(now())
+
+  @@index([address])
+}
+
+// ─── Yield Opportunities ────────────────────────────────────────────────────
+
+model Opportunity {
+  id              String   @id @default(cuid())
+  protocolName    String
+  protocolAddress String
+  strategyType    String   // "lend" | "lp" | "stake" | "swap"
+  apy             Float
+  tvl             Float
+  riskScore       Int      // 1-100
+  tokenSymbol     String
+  tokenAddress    String
+  minDeposit      Float
+  description     String
+  isActive        Boolean  @default(true)
+  lastUpdated     DateTime @updatedAt
+  createdAt       DateTime @default(now())
+
+  @@index([strategyType])
+  @@index([riskScore])
+  @@index([isActive])
+  @@index([apy(sort: Desc)])
+}
+
+// ─── User Positions ─────────────────────────────────────────────────────────
+
+model UserPosition {
+  id               String         @id @default(cuid())
+  userAddress      String         @unique
+  initUsername      String?        // .init username if resolved
+  totalDeposited   Float
+  totalWithdrawn   Float
+  currentValue     Float          // estimated from strategy values
+  riskScore        Int
+  autopilotEnabled Boolean        @default(false)
+  lastTxHash       String?
+  lastUpdated      DateTime       @updatedAt
+  createdAt        DateTime       @default(now())
+  strategies       UserStrategy[]
+
+  @@index([userAddress])
+}
+
+// ─── User Strategies ────────────────────────────────────────────────────────
+
+model UserStrategy {
+  id              String       @id @default(cuid())
+  userAddress     String
+  protocolAddress String
+  strategyType    String
+  allocatedAmount Float
+  currentValue    Float
+  isActive        Boolean      @default(true)
+  createdAt       DateTime     @default(now())
+  position        UserPosition @relation(fields: [userAddress], references: [userAddress])
+
+  @@index([userAddress])
+  @@index([isActive])
+}
+
+// ─── Leaderboard ────────────────────────────────────────────────────────────
+
+model LeaderboardEntry {
+  id            String   @id @default(cuid())
+  userAddress   String   @unique
+  initUsername  String?
+  totalReturn   Float    // percentage return
+  strategyLabel String   // human-readable strategy summary
+  riskScore     Int
+  totalValue    Float
+  rank          Int
+  lastUpdated   DateTime @updatedAt
+
+  @@index([rank])
+  @@index([totalReturn(sort: Desc)])
+}
+
+// ─── Airdrop Progress ───────────────────────────────────────────────────────
+
+model AirdropProgress {
+  id          String    @id @default(cuid())
+  address     String
+  campaignId  String
+  stepsDone   Json      @default("[]") // string[] of completed step names
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@unique([address, campaignId])
+  @@index([address])
+  @@index([campaignId])
+}
+
+// ─── Transactions ───────────────────────────────────────────────────────────
+
+model Transaction {
+  id        String   @id @default(cuid())
+  hash      String   @unique
+  address   String
+  type      String   // "stake" | "bridge" | "swap" | "deposit" | "withdraw"
+  amount    Float
+  status    String   // "pending" | "confirming" | "completed" | "failed"
+  chain     String   // "initia" | "ethereum->initia"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([address])
+  @@index([hash])
+  @@index([status])
+}
