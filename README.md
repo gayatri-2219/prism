@@ -124,6 +124,3 @@ npx vercel --prod
 - `docs/WORKFLOW_GUIDE.md`
 - `docs/SYSTEM_ARCHITECTURE.md`
 
-## License
-
-Add a `LICENSE` file before public release (recommended: MIT).
